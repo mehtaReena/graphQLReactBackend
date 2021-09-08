@@ -21,8 +21,8 @@ const typeDefs = gql`
   }
   type Mutation {
     createTodo(text: String!):Todo
-    removeTodo(id: String!):String
-    updateTodo(id: String!):String
+    removeTodo(id: String!):[Todo]
+    updateTodo(id: String!):[Todo]
   }
 `;
 
@@ -32,7 +32,7 @@ const resolvers = {
   },
   Mutation: {
     createTodo:(parent, args, context, info)  => {
-         console.log(args)
+        //  console.log(args)
 
          const todoObj ={
            id: Date.now().toString(),
@@ -44,22 +44,22 @@ const resolvers = {
       // return "Test"
     },
     removeTodo: (parent, args, context, info)  => {
-      console.log(args)
+      // console.log(args)
        for (let i in todos) {
         if (todos[i].id === args.id) {
           todos.splice(i, 1);
         }
       }
-      return args.id;
+      return todos;
     },
     updateTodo: (parent, args, context, info)  => {
-      console.log(args)
+      // console.log(args)
        for (let i in todos) {
          if (todos[i].id === args.id) {
            todos[i].completed = !todos[i].completed;
          }
        }
-      return args.id;
+      return todos;
     }
   }
 };
