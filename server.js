@@ -74,7 +74,10 @@ async function startExpressApolloServer() {
 
   server.applyMiddleware({ app });
 
-  await new Promise(resolve => app.listen({ port:4000 }, resolve));
+
+const PORT = process.env.PORT || 4000
+
+  await new Promise(resolve => app.listen({ port:PORT }, resolve));
   console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
   return { server, app };
 }
