@@ -20,7 +20,7 @@ const typeDefs = gql`
     todos: [Todo]!
   }
   type Mutation {
-    createTodo(text: String!):String
+    createTodo(text: String!):Todo
     removeTodo(id: String!):String
     updateTodo(id: String!):String
   }
@@ -33,12 +33,14 @@ const resolvers = {
   Mutation: {
     createTodo:(parent, args, context, info)  => {
          console.log(args)
-       return todos.push({
-        id: Date.now().toString(),
-        text: args.text,
-        completed: false,
-      });
 
+         const todoObj ={
+           id: Date.now().toString(),
+          text: args.text,
+          completed: false,}
+
+       todos.push(todoObj);
+        return todoObj;
       // return "Test"
     },
     removeTodo: (parent, args, context, info)  => {
@@ -78,7 +80,7 @@ async function startExpressApolloServer() {
 const PORT = process.env.PORT || 4000
 
   await new Promise(resolve => app.listen({ port:PORT }, resolve));
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+  console.log(`Server ready at ${server.graphqlPath}`);
   return { server, app };
 }
 
