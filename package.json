@@ -1,13 +1,13 @@
 {
-  "name": "todo-react-graphql",
+  "name": "react-graphql-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
-  "author": "Kelvin Gobo",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.3.0",
     "cors": "^2.8.5",
