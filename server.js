@@ -5,7 +5,7 @@ const cors = require('cors');
 let todos = [
   {
     id: Date.now().toString(),
-    text: 'Hello from GraphQL',
+    text: 'My first task',
     completed: true,
   },
 ];
