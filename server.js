@@ -21,8 +21,8 @@ const typeDefs = gql`
   }
   type Mutation {
     createTodo(text: String!):Todo
-    removeTodo(id: String!):[Todo]
-    updateTodo(id: String!):[Todo]
+    removeTodo(id: String!):String
+    updateTodo(id: String!):String
   }
 `;
 
@@ -50,16 +50,16 @@ const resolvers = {
           todos.splice(i, 1);
         }
       }
-      return todos;
+      return args.id;
     },
     updateTodo: (parent, args, context, info)  => {
-      // console.log(args)
+       console.log(args)
        for (let i in todos) {
          if (todos[i].id === args.id) {
            todos[i].completed = !todos[i].completed;
          }
        }
-      return todos;
+      return args.id;
     }
   }
 };
@@ -79,7 +79,7 @@ async function startExpressApolloServer() {
 
 const PORT = process.env.PORT || 4000
 
-  await new Promise(resolve => app.listen({ port:PORT }, resolve));
+  await new Promise(resolve => app.listen({ port:4000 }, resolve));
   console.log(`Server ready at ${server.graphqlPath}`);
   return { server, app };
 }
